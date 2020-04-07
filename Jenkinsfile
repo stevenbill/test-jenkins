@@ -1,48 +1,46 @@
 pipeline {
-   agent any
-   environment {
-       registry = "magalixcorp/k8scicd"
-       GOCACHE = "/tmp"
-   }
-   stages {
-       stage('Build') {
-           agent {
-               docker {
-                   image 'golang'
-               }
-           }
- 
-       }
-       stage('Test') {
-           agent {
-               docker {
-                   image 'golang'
-               }
-           }
 
-       }
-       stage('Publish') {
-           environment {
-               registryCredential = 'dockerhub'
-           }
-           steps{
-               script {
-                   def appimage = docker.build registry + ":$BUILD_NUMBER"
-                   docker.withRegistry( '', registryCredential ) {
-                       appimage.push()
-                       appimage.push('latest')
-                   }
-               }
-           }
-       }
-       stage ('Deploy') {
-           steps {
-               script{
-                   def image_id = registry + ":$BUILD_NUMBER"
-                   sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
-               }
-           }
-       }
-   }
+  environment {
+    registry = "192.168.1.81:5000/justme/myweb"
+    dockerImage = ""
+  }
+
+  agent any
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/justmeandopensource/playjenkins.git'
+      }
+    }
+
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+
+    stage('Push Image') {
+      steps{
+        script {
+          docker.withRegistry( "" ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+
+    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
+        }
+      }
+    }
+
+  }
+
 }
-
