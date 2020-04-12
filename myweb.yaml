@@ -1,38 +1,16 @@
----
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1beta1
 metadata:
-  labels:
-    app: myweb
-  name: myweb
+  name: my-httpd
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: myweb
   template:
     metadata:
       labels:
-        app: myweb
+        app: webservers
     spec:
       containers:
-      - image: 192.168.1.81:5000/justme/myweb:1
-        imagePullPolicy: Always
-        name: myweb
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: myweb
-  name: myweb
-spec:
-  ports:
-  - nodePort: 32223
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: myweb
-  type: NodePort
+      - name: my-httpd-container1
+        image: httpd
+        ports:
+        - containerPort: 80
