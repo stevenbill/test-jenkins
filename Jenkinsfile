@@ -1,7 +1,7 @@
 
 pipeline {
 
-agent { label 'minikube' }
+agent { label 'master' }
 
   stages {
 
