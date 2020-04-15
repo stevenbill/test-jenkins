@@ -14,7 +14,7 @@ agent { label 'master' }
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "nginx.yaml", kubeconfigId: "kubeconfig")
+          kubernetesDeploy(configs: "php-apache.yaml", kubeconfigId: "kubeconfig")
         }
       }
     }
