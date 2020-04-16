@@ -15,6 +15,7 @@ spec:
       containers:
       - name: php-apache
         image: k8s.gcr.io/hpa-example
+        command: [ "/bin/sh", "-c", "touch yousry.html" ]
         ports:
         - containerPort: 80
         resources:
