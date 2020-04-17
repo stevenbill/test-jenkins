@@ -7,7 +7,25 @@ agent { label 'master' }
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/stevenbill/test-jenkins.git', branch:'master'
+        git 'https://github.com/justmeandopensource/playjenkins.git'
+      }
+    }
+
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+
+    stage('Push Image') {
+      steps{
+        script {
+          docker.withRegistry( "" ) {
+            dockerImage.push()
+          }
+        }
       }
     }
 
