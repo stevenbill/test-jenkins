@@ -1,38 +1,38 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-apache
+  labels:
+    app: myweb
+  name: myweb
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      run: php-apache
-  replicas: 1
+      app: myweb
   template:
     metadata:
       labels:
-        run: php-apache
+        app: myweb
     spec:
       containers:
-      - name: php-apache
-        image: k8s.gcr.io/hpa-example
-        ports:
-        - containerPort: 80
-        resources:
-          limits:
-            cpu: 500m
-          requests:
-            cpu: 200m
+      - image: localhost:5000/justme/myweb:1
+        imagePullPolicy: Always
+        name: myweb
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: php-apache
   labels:
-    run: php-apache
+    app: myweb
+  name: myweb
 spec:
   ports:
-  - port: 80
+  - nodePort: 32223
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
-    run: php-apache
+    app: myweb
+  type: NodePort
