@@ -7,7 +7,7 @@ agent { label 'master' }
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/justmeandopensource/playjenkins.git'
+        git 'https://github.com/stevenbill/test-jenkins.git'
       }
     }
 
