@@ -1,7 +1,12 @@
 
 pipeline {
 
-agent { label 'master' }
+  environment {
+    registry = "localhost:5000/justme/myweb"
+    dockerImage = ""
+  }
+
+  agent any
 
   stages {
 
