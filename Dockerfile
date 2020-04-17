@@ -27,8 +27,8 @@ CMD service apache2 start; mysqld_safe
 
 
 
-WORKDIR ./
+WORKDIR /code
 COPY . /var/www/html
 EXPOSE 8181
-EXPOSE 3306
+
 
