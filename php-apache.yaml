@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: php-apache
-        image: localhost:5000/justme/myweb:1
+        image: tcp://localhost:5000/justme/myweb:1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
