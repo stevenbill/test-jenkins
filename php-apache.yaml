@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,11 +26,12 @@ spec:
         volumeMounts:
         - name: shared-volume
           mountPath: /nginx-data
-        
+        command: ["/bin/sh"]
+        args: ["-c", "echo '<h1>Hello Kubernetes</h1>' > /nginx-data/index.html"]
 
       containers:
-      - image: localhost:5000/justme/myweb
-        name: localhost:5000/justme/myweb 
+      - image: nginx
+        name: nginx
         volumeMounts:
         - name: shared-volume
           mountPath: /usr/share/nginx/html
