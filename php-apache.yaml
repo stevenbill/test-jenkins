@@ -31,8 +31,8 @@ spec:
         args: ["-c", "echo '<h1>Hello Kubernetes</h1>' > /nginx-data/index.html"]
 
       containers:
-      - image: nginx
-        name: nginx
+      - image: localhost:5000/justme/myweb
+        name: localhost:5000/justme/myweb 
         volumeMounts:
         - name: shared-volume
           mountPath: /usr/share/nginx/html
