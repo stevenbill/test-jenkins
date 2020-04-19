@@ -28,7 +28,7 @@ spec:
         - name: shared-volume
           mountPath: /nginx-data
         command: ["/bin/sh"]
-        args: ["-c", "echo '<h1>Hello proo oooo   yousry</h1>' > /nginx-data/index.html"]
+        args: ["-c", "git clone https://github.com/justmeandopensource/kubernetes.git > /nginx-data"]
 
       containers:
       - image: nginx
