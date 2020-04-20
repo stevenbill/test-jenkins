@@ -26,7 +26,7 @@ spec:
       - image: 51
         name:  51
         imagePullSecrets:
-        - name: eW91c3J5OTQzOnN0ZXZlbmJpbGw0NTYyMDA4
+        - name: Docker-Client/18.09.7 (linux)
 
         volumeMounts:
         - name: shared-volume
