@@ -25,9 +25,8 @@ spec:
       containers:
       - image: 51
         name:  51
-        imagePullPolicy: IfNotPresent
         imagePullSecrets:
-        - name: docregkey
+        - name: eW91c3J5OTQzOnN0ZXZlbmJpbGw0NTYyMDA4
 
         volumeMounts:
         - name: shared-volume
