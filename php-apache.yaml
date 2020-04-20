@@ -23,9 +23,9 @@ spec:
 
 
       containers:
-      - image: 51
-        name:  51
-      
+      - image: localhost:5000/ubuntu
+        name:  localhost:5000/ubuntu 
+
 
         volumeMounts:
         - name: shared-volume
