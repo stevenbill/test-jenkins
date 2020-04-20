@@ -20,12 +20,15 @@ spec:
       - name: shared-volume
         emptyDir: {}
 
-     
+
 
       containers:
       - image: 51
         name:  51
-        
+        imagePullPolicy: IfNotPresent
+        imagePullSecrets:
+        - name: docregkey
+
         volumeMounts:
         - name: shared-volume
           mountPath: /usr/share/nginx/html
