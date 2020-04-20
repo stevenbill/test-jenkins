@@ -23,8 +23,8 @@ spec:
      
 
       containers:
-      - image: localhost:5000/justme/myweb
-        name: localhost:5000/justme/myweb
+      - image: 51
+        name:  51
         
         volumeMounts:
         - name: shared-volume
